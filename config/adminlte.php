@@ -114,7 +114,7 @@ return [
             'url'  => '/',
         ],
         [
-            'text' => 'Môn h',
+            'text' => 'Môn học',
             'url'  => 'subject',
         ],
         [
@@ -139,22 +139,22 @@ return [
             'text' => 'Giảng viên',
             'url'  => 'lecturer',
         ],
-        [
-            'text' => 'Sinh viên học lại',
-            'url'  => 'studyagain',
-        ],
-        [
-            'text' => 'Sinh viên thi lại',
-            'url'  => 'retest',
-        ],
-        [
-            'text' => 'Sinh viên lên lớp',
-            'url'  => 'studyresult/1/2017-2018/1',
-        ],
-        [
-            'text' => 'Sinh viên đạt học bổng',
-            'url'  => 'scholarship/2017-2018/1/0',
-        ],
+        // [
+        //     'text' => 'Sinh viên học lại',
+        //     'url'  => 'studyagain',
+        // ],
+        // [
+        //     'text' => 'Sinh viên thi lại',
+        //     'url'  => 'retest',
+        // ],
+        // [
+        //     'text' => 'Sinh viên lên lớp',
+        //     'url'  => 'studyresult/1/2017-2018/1',
+        // ],
+        // [
+        //     'text' => 'Sinh viên đạt học bổng',
+        //     'url'  => 'scholarship/2017-2018/1/0',
+        // ],
 
 
 //        [

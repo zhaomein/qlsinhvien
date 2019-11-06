@@ -26,7 +26,7 @@ $(function () {
                 }
                 if(resp.error==1)
                 {
-                    toastr.error(resp.message, 'Thông Báo!', {closeButton:true});
+                    alert(resp.message);
                 }
             }, 'json');
             return false;

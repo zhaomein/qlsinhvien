@@ -15,6 +15,7 @@ class UserController extends Controller
 {
     var $mail="";
     public function getLogin(){
+        //dd(bcrypt('12345'));
 
         return view('admin.login');
     }

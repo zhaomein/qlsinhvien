@@ -17,8 +17,10 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::post('auth/register', 'UserController@register');
-Route::post('auth/login', 'Api\UserController@login');
+
+Route::post('register', 'Api\AuthController@register');
+Route::post('login', 'Api\AuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('user-info', 'UserController@getUserInfo');
+    Route::get('students', 'Api\StudentController@getStudents');
+    Route::get('classes', 'Api\ClassController@getClasses');
 });

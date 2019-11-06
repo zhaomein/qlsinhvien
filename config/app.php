@@ -181,7 +181,7 @@ return [
         Yajra\DataTables\ButtonsServiceProvider::class,
         //excell
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
 
     ],
 

@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SinhVien;
-use App\Lop;
+use App\GiangVien;
 use \Validator;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,27 +19,24 @@ class StudentController extends Controller
         $offset = !empty($request->offset) ? $request->offset: 0;
         $limit = !empty($request->limit) ? $request->limit: 20;
 
-        $students = SinhVien::orderBy('id')->skip($offset)->take($limit)->get();
+        $teachers = GiangVien::orderBy('id')->skip($offset)->take($limit)->get();
 
-        $students->load('lops');
         return response()->json([
             'status' => true,
-            'data' => $students
+            'data' => $teachers
         ]);
     }
 
 
     public function store(Request $request)
     {
-  
+
         $validator = Validator::make($request->all(), [
             'code' => 'required|min:6',
             'surname' => 'required|min:2|max:10',
             'name' => 'required|min:2|max:10', 
             'gender' => 'required', 
-            'birthday' => 'required',
-            'address' => 'required', 
-            'class_id' => 'required'
+            'birthday' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -49,29 +45,18 @@ class StudentController extends Controller
                 'message' => $validator->errors()->first()
             ];
         }else{
-            $class = Lop::find($request->class_id);
+            $teacher = new GiangVien();
 
-            if($class == null) {
-                return [
-                    'status' => false,
-                    'message' => 'Class not exists!' 
-                ];
-            }
+            $teacher->magv = $request->code;
+            $teacher->hogv = $request->surname;
+            $teacher->tengv = $request->name;
+            $teacher->gioitinh = $request->gender;
+            $teacher->ngaysinh = $request->birthday;
 
-            $student = new SinhVien();
-
-            $student->masv = $request->code;
-            $student->hosv = $request->surname;
-            $student->tensv = $request->name;
-            $student->gioitinh = $request->gender;
-            $student->ngaysinh = $request->birthday;
-            $student->quequan = $request->address;
-            $student->lop_id = $class->id;
-
-            $student->save();
+            $teacher->save();
             return [
                 'status' => true,
-                'data' => $student
+                'data' => $teacher
             ];
         }
     }
@@ -112,9 +97,7 @@ class StudentController extends Controller
             'surname' => 'required|min:2|max:10',
             'name' => 'required|min:2|max:10', 
             'gender' => 'required', 
-            'birthday' => 'required',
-            'address' => 'required', 
-            'class_id' => 'required'
+            'birthday' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -123,35 +106,25 @@ class StudentController extends Controller
                 'message' => $validator->errors()->first()
             ];
         } else {
-            $student = SinhVien::find($id);
+            $teacher = GiangVien::find($id);
 
-            if($student == null) {
+            if($teacher == null) {
                 return [
                     'status' => false,
-                    'message' => 'Student not found!' 
+                    'message' => 'teacher not found!' 
                 ];
             }
 
-            $class = Lop::find($request->class_id);
-            if($class == null) {
-                return [
-                    'status' => false,
-                    'message' => 'Class not exists!' 
-                ];
-            }
+            $teacher->magv = $request->code;
+            $teacher->hogv = $request->surname;
+            $teacher->tengv = $request->name;
+            $teacher->gioitinh = $request->gender;
+            $teacher->ngaysinh = $request->birthday;
 
-            $student->masv = $request->code;
-            $student->hosv = $request->surname;
-            $student->tensv = $request->name;
-            $student->gioitinh = $request->gender;
-            $student->ngaysinh = $request->birthday;
-            $student->quequan = $request->address;
-            $student->lop_id = $class->id;
-
-            $student->update();
+            $teacher->update();
             return [
                 'status' => true,
-                'data' => $student
+                'data' => $teacher
             ];
         }
     }
@@ -165,7 +138,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         try {
-            SinhVien::destroy($id);
+            GiangVien::destroy($id);
             return [
                 'status' => true,
                 'data' => 'Delete success!'
@@ -173,7 +146,7 @@ class StudentController extends Controller
         } catch (\Exception $e) {
             return [
                 'status' => false,
-                'message' => 'Error when delete student!'
+                'message' => 'Error when delete teacher!'
             ];
         }
     }

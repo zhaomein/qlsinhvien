@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 Route::post('register', 'Api\AuthController@register');
 Route::post('login', 'Api\AuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('students', 'Api\StudentController@getStudents');
-    Route::get('classes', 'Api\ClassController@getClasses');
+    Route::resource('students', 'Api\StudentController');
+    Route::resource('classes', 'Api\ClassController');
+    Route::resource('teachers', 'Api\TeacherController');
 });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Khoa;
 use App\Lop;
+use App\Sinhvien;
 use \Validator;
 
 class ClassController extends Controller
@@ -110,12 +111,11 @@ class ClassController extends Controller
             ];
         } else {
             $class = Lop::find($id);
-            
 
             if($class == null) {
                 return [
                     'status' => false,
-                    'message' => 'Band not found!'
+                    'message' => 'Class not found!'
                 ];
             }
 
@@ -160,6 +160,28 @@ class ClassController extends Controller
                 'message' => 'Error when delete class!'
             ];
         }
-        
+    }
+
+    //get student of a class
+    function getStudents(Request $request, $id) {
+        $class = Lop::find($id);
+
+        if($class == null) {
+            return [
+                'status' => false,
+                'message' => 'Class not found!'
+            ];
+        }
+
+        $offset = !empty($request->offset) ? $request->offset: 0;
+        $limit = !empty($request->limit) ? $request->limit: 20;
+
+        $students = Sinhvien::where('lop_id', $id)->orderBy('id')->skip($offset)->take($limit)->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $students
+        ]);
+
     }
 }

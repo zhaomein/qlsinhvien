@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\GiangVien;
+use App\Giangvien;
 use \Validator;
 
 class TeacherController extends Controller
@@ -19,7 +19,7 @@ class TeacherController extends Controller
         $offset = !empty($request->offset) ? $request->offset: 0;
         $limit = !empty($request->limit) ? $request->limit: 20;
 
-        $teachers = GiangVien::orderBy('id')->skip($offset)->take($limit)->get();
+        $teachers = Giangvien::orderBy('id')->skip($offset)->take($limit)->get();
 
         return response()->json([
             'status' => true,
@@ -45,7 +45,7 @@ class TeacherController extends Controller
                 'message' => $validator->errors()->first()
             ];
         }else{
-            $teacher = new GiangVien();
+            $teacher = new Giangvien();
 
             $teacher->magv = $request->code;
             $teacher->hogv = $request->surname;
@@ -106,7 +106,7 @@ class TeacherController extends Controller
                 'message' => $validator->errors()->first()
             ];
         } else {
-            $teacher = GiangVien::find($id);
+            $teacher = Giangvien::find($id);
 
             if($teacher == null) {
                 return [
@@ -138,7 +138,7 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         try {
-            GiangVien::destroy($id);
+            Giangvien::destroy($id);
             return [
                 'status' => true,
                 'data' => 'Delete success!'

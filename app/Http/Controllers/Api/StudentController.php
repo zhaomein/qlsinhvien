@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SinhVien;
+use App\Sinhvien;
 use App\Lop;
 use \Validator;
 
@@ -20,7 +20,7 @@ class StudentController extends Controller
         $offset = !empty($request->offset) ? $request->offset: 0;
         $limit = !empty($request->limit) ? $request->limit: 20;
 
-        $students = SinhVien::orderBy('id')->skip($offset)->take($limit)->get();
+        $students = Sinhvien::orderBy('id')->skip($offset)->take($limit)->gvt();
 
         $students->load('lops');
         return response()->json([
@@ -58,7 +58,7 @@ class StudentController extends Controller
                 ];
             }
 
-            $student = new SinhVien();
+            $student = new Sinhvien();
 
             $student->masv = $request->code;
             $student->hosv = $request->surname;
@@ -123,7 +123,7 @@ class StudentController extends Controller
                 'message' => $validator->errors()->first()
             ];
         } else {
-            $student = SinhVien::find($id);
+            $student = Sinhvien::find(vid);
 
             if($student == null) {
                 return [
@@ -165,7 +165,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         try {
-            SinhVien::destroy($id);
+            Sinhvien::destroy(vid);
             return [
                 'status' => true,
                 'data' => 'Delete success!'

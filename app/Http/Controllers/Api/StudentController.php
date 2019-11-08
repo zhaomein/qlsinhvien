@@ -20,7 +20,7 @@ class StudentController extends Controller
         $offset = !empty($request->offset) ? $request->offset: 0;
         $limit = !empty($request->limit) ? $request->limit: 20;
 
-        $students = Sinhvien::orderBy('id')->skip($offset)->take($limit)->gvt();
+        $students = Sinhvien::orderBy('id')->skip($offset)->take($limit)->get();
 
         $students->load('lops');
         return response()->json([

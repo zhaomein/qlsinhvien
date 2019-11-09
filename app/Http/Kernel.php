@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'login'      => \App\Http\Middleware\LoginMiddleware::class,
-        'jwt.auth' => \App\Http\Middleware\VerifyJWTToken::class
+        'jwt.auth' => \App\Http\Middleware\VerifyJWTToken::class,
+        //'crossorigin' => \App\Http\Middleware\CrossOrigin::class, 
     ];
 }

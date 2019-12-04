@@ -10,7 +10,7 @@ class Monhoc extends Model
 
     public function lops()
     {
-        return $this->belongsToMany('App\Lop','monhoc_lop','monhoc_id','lop_id');
+        return $this->hasMany('App\Lop', 'id');
     }
     public function giangviens()
     {

@@ -26,8 +26,15 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     //class
     Route::get('classes/{id}/students', 'Api\ClassController@getStudents');
+
     Route::resource('classes', 'Api\ClassController');
     
     Route::resource('teachers', 'Api\TeacherController');
+
+    Route::resource('subjects', 'Api\SubjectController');
+
+    Route::resource('points', 'Api\PointController');
+
+    Route::get('dashboard', 'Api\DashboardController@index');
 });
     
